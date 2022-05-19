@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="723.0" prefWidth="1128.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="soportec.SoporTecFXMLController">
+   <children>
+      <TabPane layoutX="-1.0" layoutY="-1.0" prefHeight="723.0" prefWidth="1128.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab closable="false" text="Administración de empleados">
+               <content>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="empleadosTable" layoutX="83.0" layoutY="303.0" prefHeight="340.0" prefWidth="963.0">
+                          <columns>
+                            <TableColumn fx:id="dpiColumn" prefWidth="305.0" text="DPI" />
+                            <TableColumn fx:id="nombreColumn" prefWidth="483.0" text="Nombre" />
+                              <TableColumn fx:id="tipoSoporteColumn" minWidth="0.0" prefWidth="174.0" text="Tipo de soporte" />
+                          </columns>
+                        </TableView>
+                        <TextField fx:id="dpiField" layoutX="338.0" layoutY="74.0" prefHeight="25.0" prefWidth="401.0" />
+                        <TextField fx:id="nombreField" layoutX="338.0" layoutY="126.0" prefHeight="25.0" prefWidth="401.0" />
+                        <Label layoutX="338.0" layoutY="161.0" prefHeight="17.0" prefWidth="110.0" text="Tipo de soporte">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <ChoiceBox fx:id="tipoSoporte" layoutX="339.0" layoutY="178.0" prefHeight="25.0" prefWidth="401.0" />
+                        <Label layoutX="338.0" layoutY="109.0" prefHeight="17.0" prefWidth="110.0" text="Nombre Completo">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="338.0" layoutY="57.0" prefHeight="17.0" prefWidth="110.0" text="DPI">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="guardarButton" layoutX="523.0" layoutY="234.0" mnemonicParsing="false" onAction="#handleInsert" text="Guardar" />
+                        <Button fx:id="updateButton" layoutX="501.0" layoutY="234.0" mnemonicParsing="false" onAction="#handleUpdate" prefHeight="25.0" prefWidth="103.0" text="Modificar" visible="false" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+          <Tab text="Visualización de datos">
+               <content>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <TableView layoutX="28.0" layoutY="164.0" prefHeight="444.0" prefWidth="1082.0">
+                           <columns>
+                              <TableColumn prefWidth="305.0" text="DPI" />
+                              <TableColumn prefWidth="483.0" text="Nombre" />
+                              <TableColumn minWidth="0.0" prefWidth="293.0" text="Tipo de soporte" />
+                           </columns>
+                        </TableView>
+                        <Label layoutX="28.0" layoutY="127.0" text="Información:" textFill="RED" />
+                        <Label layoutX="110.0" layoutY="127.0" prefHeight="18.0" prefWidth="819.0" text="La información en esta tabla muestra los empleados guardados en el sistema de manera que se recorre la lista hacia adelante" />
+                        <Label layoutX="104.0" layoutY="14.0" text="Empleados Guardados en el Sistema">
+                           <font>
+                              <Font name="System Bold" size="55.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>
