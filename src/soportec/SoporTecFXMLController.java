@@ -175,8 +175,8 @@ public class SoporTecFXMLController implements Initializable {
         recorrerListaYActualizarTabla();
         limpiarCampos();
         dpiField.setDisable(false);
-        guardarButton.setVisible(false);
-        updateButton.setVisible(true);    
+        guardarButton.setVisible(true);
+        updateButton.setVisible(false);    
     }
 
 }
