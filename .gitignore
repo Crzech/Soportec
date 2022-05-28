@@ -36,6 +36,6 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
-Listas.csv
+Listass.csv
 
 # End of https://www.toptal.com/developers/gitignore/api/netbeans,java
