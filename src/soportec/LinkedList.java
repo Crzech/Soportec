@@ -60,8 +60,10 @@ public class LinkedList {
             last = last.next;
         }
         
-        list = delete(list, last.next.dpi);
-        list = insert(list, last.next.dpi, new_nombre, new_tipo_sporte);
+        Node found = last.next;
+        
+        list = delete(list, found.dpi);
+        list = insert(list, found.dpi, new_nombre, new_tipo_sporte);
         
         return list;
     }

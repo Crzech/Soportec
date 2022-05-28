@@ -1,5 +1,9 @@
 package soportec;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -20,9 +24,9 @@ public class SoporTecFXMLController implements Initializable {
 
     ObservableList<String> tipoSoporteList = FXCollections
             .observableArrayList(
-                    "Técnico en reparación de PCs",
-                    "Técnico de aplicativos",
-                    "Técnico de redes e internet"
+                    "Tecnico en Reparacion de PCs",
+                    "Tecnico de Aplicativos",
+                    "Tecnico de Redes e Internet"
             );
 
     // Form controls
@@ -36,9 +40,11 @@ public class SoporTecFXMLController implements Initializable {
     private Button guardarButton;
     @FXML
     private Button updateButton;
+    @FXML
+    private Button cargarcsvButton;
 
     // Linked List
-    private LinkedList listaEmpleados;
+    private static LinkedList listaEmpleados;
 
     // TableView Stuff
     @FXML
@@ -66,7 +72,9 @@ public class SoporTecFXMLController implements Initializable {
         Node currNode = listaEmpleados.head;
         while (currNode != null) {
             empleados.add(currNode);
+           
             currNode = currNode.next;
+            
         }
         empleadosTable.setItems(empleados);
     }
@@ -84,7 +92,9 @@ public class SoporTecFXMLController implements Initializable {
                         Node data = getTableView().getItems().get(getIndex());
                         listaEmpleados = LinkedList.delete(listaEmpleados, data.dpi);
                         recorrerListaYActualizarTabla();
+                        Guardarcsv();
                     });
+                    
                 }
 
                 @Override
@@ -122,7 +132,9 @@ public class SoporTecFXMLController implements Initializable {
                         tipoSoporte.setValue(data.tipo_soporte);
                         guardarButton.setVisible(false);
                         updateButton.setVisible(true);
+                       
                     });
+                     
                 }
 
                 @Override
@@ -133,6 +145,7 @@ public class SoporTecFXMLController implements Initializable {
                     } else {
                         setGraphic(btn);
                     }
+                     Guardarcsv();
                 }
             };
             return cell;
@@ -159,6 +172,8 @@ public class SoporTecFXMLController implements Initializable {
                 tipoSoporte.getValue().toString()
         );
         recorrerListaYActualizarTabla();
+      limpiarCampos();
+       Guardarcsv();
     }
     
     
@@ -178,5 +193,55 @@ public class SoporTecFXMLController implements Initializable {
         guardarButton.setVisible(true);
         updateButton.setVisible(false);    
     }
+    
+    @FXML
+    private void cargarcsv(ActionEvent event) {
+        System.out.println(System.getProperty("user.dir"));
+         String FieldDelimiter = ";";
+ 
+        BufferedReader br;
+ 
+        try {
+            br = new BufferedReader(new FileReader(System.getProperty("user.dir") + "\\Listass.csv"));
+ 
+            String line;
+            while ((line = br.readLine()) != null) {
+              
+                String[] values = line.split(FieldDelimiter, -1);
+                Node record = new Node(Long.parseLong(values[0]), values[1], values[2]);
+              listaEmpleados= LinkedList.insert(listaEmpleados,Long.parseLong(values[0]), values[1], values[2]);
+                recorrerListaYActualizarTabla();
+ 
+            }
+ 
+        } catch (Exception ex){
+           System.out.println(ex.getMessage());
+     }
+        cargarcsvButton.setDisable(true);
+        Guardarcsv();
+    }
+    
+  public static void Guardarcsv (){
+        BufferedWriter archivoescritura = null;
+        String directorio = System.getProperty("user.dir") + "\\Listass.csv";
+        try {
+            archivoescritura = new BufferedWriter (new FileWriter (directorio));
+              ObservableList<Node> empleados = FXCollections.observableArrayList();
 
+        Node c2 = listaEmpleados.head;
+        while (c2 != null) {
+            empleados.add(c2);
+            
+            archivoescritura.write(c2.getDpi()+";" + c2.getNombre_completo()+ ";"+ c2.getTipo_soporte());
+            archivoescritura.newLine();
+            
+            c2 = c2.next;
+            
+        }
+
+        archivoescritura.close();
+        } catch (Exception ex){
+            
+        }
+    }
 }
